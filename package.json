@@ -1,0 +1,15 @@
+{
+  "name": "still-may",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rhyss/still-may.git",
+  "author": "Rhys Sharrem <rhys.sharrem@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "twit": "^2.2.9"
+  }
+}
