@@ -62,12 +62,37 @@ tweetReceived = function(tweet) {
 	}
 }
 
-reportStatus = function() {
-	return reportDate() + ((hasMayResigned && (moment() >= june)) || (! hasMayResigned && (moment() < june)) ? ' and ' : ' but ') + reportTheresa();
+const messages = [
+	'May, May go away. Don\'t come again another day.',
+	'May should not do as she May, in May.',
+	'May does not amaze me.',
+	'MAYDAY, MAYDAY. We have a problem.',
+	'May the forth be with you. Not that one though.',
+	'Mayo, Mayyyyo. Daylight come and me want May gone.'
+]
+
+getARandomMessage = function() {
+	return  messages[Math.floor(Math.random() * messages.length)];
 }
 
-reportDate = function() {
-	return 'It is ' + moment().format('LL') + '. May ' + ((moment() >= june) ? 'has' : 'hasn\'t') + ' finished';
+sendRandomTweet = function() {
+	var tweet = {
+		status: reportDateTime() + ' ' + getARandomMessage()
+	}
+
+	tweetStatus(tweet)
+}
+
+reportStatus = function() {
+	return reportDateTimeAndMonthStatus() + ((hasMayResigned && (moment() >= june)) || (! hasMayResigned && (moment() < june)) ? ' and ' : ' but ') + reportTheresa();
+}
+
+reportDateTime = function() {
+	return 'It is ' + moment().format('MMMM Do YYYY, h:mm:ss a') + '.';
+}
+
+reportDateTimeAndMonthStatus = function() {
+	return reportDateTime() + ' May ' + ((moment() >= june) ? 'has' : 'hasn\'t') + ' finished';
 }
 
 reportTheresa = function() {
@@ -75,6 +100,8 @@ reportTheresa = function() {
 }
 
 tweetStatus({ status: 'Hello World! ' + reportStatus()})
+
+setInterval(sendRandomTweet, 3600000)  // one hour
 
 var stream = bot.stream('user');
 
